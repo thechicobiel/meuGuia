@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'secondPage.dart';
 
 void main(){ runApp(MaterialApp(
   title: 'Guia do Santuário',
@@ -99,6 +100,15 @@ class firstPage extends StatelessWidget {
           ],
         )
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => mapaPage()),
+          );
+        },
+        child: Icon(Icons.map),
+      ),
     );
   }
 }
@@ -159,9 +169,22 @@ Widget detailsCards(String titulo) {
                 const SizedBox(height: 30),
                 RaisedButton(
                   onPressed: () {},
-                  child: const Text(
-                      'Informações',
-                      style: TextStyle(fontSize: 20)
+                  textColor: Colors.white,
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF32CD32),
+                          Color(0xFF1976D2),
+                        ],
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Text(
+                        'Informações',
+                        style: TextStyle(fontSize: 20)
+                    ),
                   ),
                 ),
               ],)
