@@ -105,7 +105,6 @@ class firstPage extends StatelessWidget {
 
 Widget _cards(String _image, String titulo) {
   return GestureDetector(
-
     child: Container(
       child: new FittedBox(
         child: Material(
@@ -113,7 +112,7 @@ Widget _cards(String _image, String titulo) {
           elevation: 14.0,
           borderRadius: BorderRadius.circular(24.0),
           shadowColor: Color(0x802196F3),
-          child: Column(
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
@@ -145,17 +144,29 @@ Widget detailsCards(String titulo) {
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: <Widget>[
       Padding(
-        padding: const EdgeInsets.only(left: 8.0),
+        padding: const EdgeInsets.all(15.0),
         child: Container(
-            child: Text(
-              titulo,
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold),
-            )),
+            child: Column(
+              children: <Widget>[
+                Text(
+                  titulo,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 30),
+                RaisedButton(
+                  onPressed: () {},
+                  child: const Text(
+                      'Informações',
+                      style: TextStyle(fontSize: 20)
+                  ),
+                ),
+              ],)
+        ),
       ),
-      SizedBox(height: 5.0),
     ],
   );
 }
