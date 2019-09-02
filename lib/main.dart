@@ -168,9 +168,12 @@ Widget detailsCards(String titulo) {
                 ),
                 const SizedBox(height: 30),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   textColor: Colors.white,
                   padding: const EdgeInsets.all(0.0),
+                  splashColor: Colors.white,
                   child: Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
