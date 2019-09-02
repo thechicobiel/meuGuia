@@ -15,10 +15,9 @@ class _mapaPageState extends State<mapaPage> {
   void initState() {
     super.initState();
   }
-  double zoomVal = 15.0;
+
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
       appBar: AppBar(
         title: Text("Guia do Santuário de Canindé (CE)"),
         centerTitle: true,
@@ -26,55 +25,22 @@ class _mapaPageState extends State<mapaPage> {
           IconButton(
               icon: Icon(Icons.refresh),
               onPressed: () {
-                _gotoLocation(-4.358, -39.3137);
+                _refresh(-4.358, -39.3137);
               }),
         ],
       ),
       body: Stack(
         children: <Widget>[
           _buildGoogleMap(context),
-          _zoomminusfunction(),
-          _zoomplusfunction(),
           _buildContainer(),
         ],
       ),
     );
   }
 
-  Widget _zoomminusfunction() {
-    return Align(
-      alignment: Alignment.topLeft,
-      child: IconButton(
-          icon: Icon(FontAwesomeIcons.searchMinus, color: Color(0xff6200ee)),
-          onPressed: () {
-            zoomVal--;
-            _minus(zoomVal);
-          }),
-    );
-  }
-
-  Widget _zoomplusfunction() {
-    return Align(
-      alignment: Alignment.topRight,
-      child: IconButton(
-          icon: Icon(FontAwesomeIcons.searchPlus, color: Color(0xff6200ee)),
-          onPressed: () {
-            zoomVal++;
-            _plus(zoomVal);
-          }),
-    );
-  }
-
-  Future<void> _minus(double zoomVal) async {
+  Future<void> _refresh(double lat,double long) async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(-4.358, -39.3137), zoom: zoomVal)));
-  }
-
-  Future<void> _plus(double zoomVal) async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(-4.358, -39.3137), zoom: zoomVal)));
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat, long), zoom: 15,)));
   }
 
   Widget _buildContainer() {
