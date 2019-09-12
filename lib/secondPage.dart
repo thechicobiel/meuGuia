@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+//É A SEGUNDA TELA, A QUE CONTEM O MAPA EM SI
 
 class mapaPage extends StatefulWidget {
   @override
@@ -18,6 +19,8 @@ class _mapaPageState extends State<mapaPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+
+      //A BARRA EM CIMA QUE CONTÉM O TÍTULO, O BOTÃO DE VOLTAR E O BOTÃO DE REFRESH
       appBar: AppBar(
         title: Text("Guia do Santuário de Canindé (CE)"),
         centerTitle: true,
@@ -38,11 +41,14 @@ class _mapaPageState extends State<mapaPage> {
     );
   }
 
+  //ESSA FUNÇÃO É EXCLUSIVA DO BOTÃO REFRESH, QUE DEIXA O MAPA NO ESTADO INICIAL
   Future<void> _refresh(double lat,double long) async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat, long), zoom: 15,)));
   }
 
+  //É A MONTAGEM DOS BOTÕES NO CANTO INFERIOR, DESENVOLVE O TAMANHO E DISPOSIÇÃO
+  //CHAMA A FUNÇÃO '_boxes' QUE QUANDO CLICADO, LEVA A VISÃO DO MAPA PARA O LOCAL SELECIONADO DE ACORDO COM AS SUAS COORDENADAS
   Widget _buildContainer() {
     return Align(
       alignment: Alignment.bottomLeft,
@@ -157,10 +163,12 @@ class _mapaPageState extends State<mapaPage> {
     );
   }
 
+  //É A FUNÇÃO CHAMADA QUANDO O USUÁRIO CLICAR NOS BOTÕES DOS PONTOS TURÍSTICOS
+  //DESENVOLVE CORES E DISPÕES ELES EM LINHA
   Widget _boxes(String _image, double lat, double long, String titulo) {
     return GestureDetector(
       onTap: () {
-        _gotoLocation(lat, long);
+        _gotoLocation(lat, long);//QUANDO CLICADO, CHAMA ESSA FUNÇÃO MANDANDO OS PARAMETROS LAT E LONG
       },
       child: Container(
         child: new FittedBox(
@@ -196,6 +204,7 @@ class _mapaPageState extends State<mapaPage> {
     );
   }
 
+  //O OBJETIVO DESSA FUNÇÃO É MOSTRAR O TÍTULO DO PONTO DENTRO DOS CARDS NO CANTO INFERIOR
   Widget myDetailsContainer1(String titulo) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -212,85 +221,12 @@ class _mapaPageState extends State<mapaPage> {
               )),
         ),
         SizedBox(height: 5.0),
-        Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                    child: Text(
-                      "4.8",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 18.0,
-                      ),
-                    )),
-                Container(
-                  child: Icon(
-                    FontAwesomeIcons.solidStar,
-                    color: Colors.amber,
-                    size: 15.0,
-                  ),
-                ),
-                Container(
-                  child: Icon(
-                    FontAwesomeIcons.solidStar,
-                    color: Colors.amber,
-                    size: 15.0,
-                  ),
-                ),
-                Container(
-                  child: Icon(
-                    FontAwesomeIcons.solidStar,
-                    color: Colors.amber,
-                    size: 15.0,
-                  ),
-                ),
-                Container(
-                  child: Icon(
-                    FontAwesomeIcons.solidStar,
-                    color: Colors.amber,
-                    size: 15.0,
-                  ),
-                ),
-                Container(
-                  child: Icon(
-                    FontAwesomeIcons.solidStar,
-                    color: Colors.amber,
-                    size: 15.0,
-                  ),
-                ),
-                Container(
-                    child: Text(
-                      "(773)",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 18.0,
-                      ),
-                    )),
-              ],
-            )),
-        SizedBox(height: 5.0),
-        Container(
-            child: Text(
-              "Telefone: (85) 3343-9950",
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 18.0,
-              ),
-            )),
-        SizedBox(height: 5.0),
-        Container(
-            child: Text(
-              "Praça da Basílica, 31 \u00B7 Centro",
-              style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold),
-            )),
       ],
     );
   }
 
+  //ESSA SERIA COMO A FUNÇÃO MAIN DESTE ARQUIVO.
+  //ELA CONTRÓI O MAPA NA POSIÇÃO INICIAL E CHAMA AS FUNÇÕES INICIAIS DEIXANDO-AS PRONTAS PARA USO
   Widget _buildGoogleMap(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height,
@@ -319,6 +255,7 @@ class _mapaPageState extends State<mapaPage> {
     );
   }
 
+  //É A FUNÇÃO CHAMADA NO '_boxes' QUE LEVA A CÂMERA PARA O PONTO ESCOLHIDO
   Future<void> _gotoLocation(double lat, double long) async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -330,6 +267,7 @@ class _mapaPageState extends State<mapaPage> {
   }
 }
 
+//OS MARKERS ABAIXO SÃO OS LOCAIS CHAMADOS NA CONSTRUÇÃO DO MAPA QUE POSICIONA AS "SETINHAS" VERDES NO MAPA MOSTRANDO ONDE QUE FICA CADA LOCAL DE UM MODO GERAL.
 Marker basilicaMarker = Marker(
   markerId: MarkerId('basilica'),
   position: LatLng(-4.359281, -39.311843),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'secondPage.dart';
 
+//ESSA É O DESENVOLVIMENTO DA PRIMEIRA TELA, A QUE TEM OS PONTOS TURÍSTICOS COM AS FOTOS E OS NOMES
+
 void main(){ runApp(MaterialApp(
   title: 'Guia do Santuário',
   home: firstPage(),
@@ -11,11 +13,14 @@ class firstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //A BARRA EM CIMA, NA PRIMEIRA TELA DO APP
       appBar: AppBar(
         title: Text('Pontos turísticos'),
         centerTitle: true,
       ),
 
+      //AS INFORMAÇÕES NOS "CARDS". CADA PADDING É UMA CAIXINHA COM UMA FOTO E O NOME DO LOCAL.
+      // MANDO O LINK DA FOTO E O NOME PARA A FUNÇÃO '_cards' QUE ESTÁ DEFINIDA MAIS PARA O FIM.
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -100,11 +105,13 @@ class firstPage extends StatelessWidget {
           ],
         )
       ),
+
+      //O BOTÃO NO CANTO INFERIOR DIREITO QUE LEVA PARA A TELA DO MAPA (A SEGUNDA TELA)
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => mapaPage()),
+            MaterialPageRoute(builder: (context) => mapaPage()), //'mapaPage' É A FUNÇÃO CHAMADA DO ARQUIVO secondPage.dart
           );
         },
         child: Icon(Icons.map),
@@ -113,6 +120,7 @@ class firstPage extends StatelessWidget {
   }
 }
 
+//ESSA FUNÇÃO É O DESENVOLVIMENTO ESTÉTICO DOS CARDS.
 Widget _cards(String _image, String titulo) {
   return GestureDetector(
     child: Container(
@@ -149,6 +157,8 @@ Widget _cards(String _image, String titulo) {
   );
 }
 
+//ESSA FUNÇÃO É PARA O BOTÃO "INFORMAÇÃO" QUE DEVE MOSTRAR DADOS SOBRE O LOCAL QUANDO CLICADO.
+//A EXECUÇÃO DAS AÇÕES SÃO DEFINIDAS NO 'onPressed', PORÉM, ESTÁ VAZIO AINDA, ENTÃO NADA OCORRE QUANDO CLICADO.
 Widget detailsCards(String titulo) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
